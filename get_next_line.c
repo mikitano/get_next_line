@@ -6,11 +6,14 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/16 14:44:11 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/23 16:51:27 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*get_next_line(int fd)
 {
-
+	static char	*remaining;
+	char		*line;
+	char		*buffer;
+	
 }
