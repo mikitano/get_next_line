@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/24 17:25:32 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/24 17:33:21 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_next_line(int fd)
 	}
 	buffer = read_line(fd, remaining, buffer);
 	//line = read_line(fd, remaining, buffer);
-	line = printable_line
+	line = printable_line();
 	if (!line)
 	{
 		free(buffer);
