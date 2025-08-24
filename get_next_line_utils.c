@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:44:28 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/23 14:16:36 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/24 10:01:45 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,28 @@ char	*ft_strchr(const char *s, int c)
 			s++;
 	}
 	return ((char *)s);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	i;
+	char	*str2;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if ((start >= ft_strlen(s)) || (len == 0))
+		return (ft_strdup(""));
+	if (len > (ft_strlen(s) - start))
+		len = (ft_strlen(s) - start);
+	str2 = malloc((len + 1) * sizeof(char));
+	if (str2 == NULL)
+		return (NULL);
+	while ((s[i + start]) && (i < len))
+	{
+		str2[i] = s[i + start];
+		i++;
+	}
+	str2[i] = '\0';
+	return (str2);
 }
