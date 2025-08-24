@@ -30,5 +30,18 @@ char	*get_next_line(int fd)
 
 char	*read_line(int fd, char *remaining, char *buffer)
 {
-	
+	int		bytes_read;
+	char	*temp;
+
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if (bytes_read <= 0)
+		return (NULL); //ou o que leu?
+	if (!ft_strchr(remaining, '\n'))
+	{
+		//substring? pra guardar o resultado em temp?
+	}
+	else
+	{
+		//copia a string de onde começou a ler nessa rodada até o ponteiro de '\n' ???
+	}
 }
