@@ -46,7 +46,7 @@ char	*read_line(int fd, char *remaining, char *buffer)
 		buffer = ft_strdup(remaining);
 	temp = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	bytes_read = 1;
-	while (bytes_read > 0) && (ft_strchr(remaining, '\n'))
+	while (bytes_read > 0 && ft_strchr(remaining, '\n')
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
@@ -54,9 +54,66 @@ char	*read_line(int fd, char *remaining, char *buffer)
 		else if (bytes_read == 0)
 			return (remaining);
 		buffer[bytes_read] = '\0';
-		else
+		temp = ft_strjoin(remaining, buffer);
+		// if (!temp)
+		// {
+		// 	free(temp);
+		// 	return (NULL);
+		// }
+		free(remaining);
+		remaining = temp;
+	}
+}
+
+char	*printable_line(int fd, char *remaining, char *buffer)
+{
+	int		i;
+	char	*printable;
+
+	i = 0;
+	if(!remaining)
+		return (NULL);
+	while(remaining[i] != '\n')
+	{
+		i++;
+		if (remaining[i] == '\0')
 		{
-			buffer = ft_substr()
+			printable = ft_strdup(remaining);
 		}
 	}
+	printable = ft_substr(remaining, 0, i));
+	printable++ = '\n';
+	if(!printable)
+	{
+		free (printable);
+		return (NULL);
+	}
+	return (printable);
+}
+
+char	*save_content(char *remaining, char *buffer)
+{
+	int		i;
+	char	*save_remaining;
+
+	i = 0;
+	while(buffer[i] != '\n')
+	{
+		i++;
+		if(buffer[i] == '\0')
+		{
+			free(free (save_remaining);
+			free (buffer);
+			return (NULL);)
+		}
+	}
+	save_remaining = ft_substr(remaining, i, (ft_strlen(buffer) - i));
+	buffer = save_remaining;
+	if(!save_remaining)
+	{
+		free (save_remaining);
+		free (buffer);
+		return (NULL);
+	}
+	return (save_remaining);
 }
