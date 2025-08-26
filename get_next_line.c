@@ -94,26 +94,27 @@ char	*printable_line(int fd, char *remaining, char *buffer)
 char	*save_content(char *remaining, char *buffer)
 {
 	int		i;
+	int		j;
 	char	*save_remaining;
 
 	i = 0;
-	while(buffer[i] != '\n')
-	{
+	j = 0;
+	if (remaining[i] == '\0')
+		return (NULL);
+	while(remaining[i] && remaining[i] != '\n')
 		i++;
-		if(buffer[i] == '\0')
-		{
-			free(free (save_remaining);
-			free (buffer);
-			return (NULL);)
-		}
-	}
-	save_remaining = ft_substr(remaining, i, (ft_strlen(buffer) - i));
-	buffer = save_remaining;
-	if(!save_remaining)
+	if (remaining[i] == \n)
+		i++;
+	else if (remaining[i] == '\0')
+		return(remaining);
+	save_remaining = malloc((ft_strlen(remaining) - i) + 1 * sizeof(char));
+		if(!save_remaining)
 	{
 		free (save_remaining);
-		free (buffer);
 		return (NULL);
 	}
+	while(remaining != '\0')
+		save_remaining[j++] == remaining[i++];
+	save_remaining[j] == '\0';
 	return (save_remaining);
 }
