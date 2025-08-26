@@ -103,18 +103,18 @@ char	*save_content(char *remaining, char *buffer)
 		return (NULL);
 	while(remaining[i] && remaining[i] != '\n')
 		i++;
-	if (remaining[i] == \n)
+	if (!remaining[i])
+		{
+			free(remaining);
+			return(NULL);
+		}
 		i++;
-	else if (remaining[i] == '\0')
-		return(remaining);
 	save_remaining = malloc((ft_strlen(remaining) - i) + 1 * sizeof(char));
 		if(!save_remaining)
-	{
-		free (save_remaining);
-		return (NULL);
-	}
+			return (NULL);
 	while(remaining != '\0')
 		save_remaining[j++] == remaining[i++];
 	save_remaining[j] == '\0';
 	return (save_remaining);
 }
+fução para dar free?
