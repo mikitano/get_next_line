@@ -1,0 +1,26 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Executar programa C",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/a.out", // ou substitua pelo nome do seu executável
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": true,
+			"MIMode": "gdb",
+			"setupCommands": [
+				{
+					"description": "Habilita formatação para o GDB",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				}
+			],
+			"preLaunchTask": "compilar o programa",
+			"miDebuggerPath": "/usr/bin/gdb" // ou o caminho do gdb no seu sistema
+		}
+	]
+}

@@ -6,9 +6,11 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:44:28 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/24 10:01:45 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/26 20:20:23 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -51,7 +53,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s1 = "";
 	if (!s2)
 		s2 = "";
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
