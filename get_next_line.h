@@ -29,8 +29,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 char	*get_next_line(int fd);
 
-char	*read_line(int fd, char *remaining, char *buffer);
-char	*printable_line(char *buffer);
-char	*save_content(char *buffer);
+char	*read_line(int fd, char *buffer, char *remaining);
+char	*printable_line(char *remaining);
+char	*save_content(char *remaining);
 
 #endif

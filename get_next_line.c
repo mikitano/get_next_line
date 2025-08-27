@@ -12,9 +12,9 @@
 
 #include "get_next_line.h"
 
-char	*read_line(int fd, char *remaining, char *buffer);
-char	*printable_line(char *buffer);
-char	*save_content(char *buffer);
+char	*read_line(int fd, char *buffer, char *remaining);
+char	*printable_line(char *remaining);
+char	*save_content(char *remaining);
 
 char	*get_next_line(int fd)
 {
@@ -28,7 +28,7 @@ char	*get_next_line(int fd)
 		remaining = NULL;
 		return (NULL);
 	}
-	buffer = read_line(fd, remaining, buffer);
+	buffer = read_line(fd, buffer, remaining);
 	line = printable_line(buffer);
 	if (!line)
 	{
@@ -39,7 +39,7 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-char	*read_line(int fd, char *remaining, char *buffer)
+char	*read_line(int fd, char *buffer, char *remaining)
 {
 	int		bytes_read;
 	char	*temp;
@@ -56,7 +56,7 @@ char	*read_line(int fd, char *remaining, char *buffer)
 		else if (bytes_read == 0)
 			return (remaining);
 		buffer[bytes_read] = '\0';
-		temp = ft_strjoin(remaining, buffer);
+		temp = ft_strjoin(remaining, buffer); //talvez tenha de dar free temp depois? mesmo quando não da erro
 		// if (!temp)
 		// {
 		// 	free(temp);
@@ -68,23 +68,23 @@ char	*read_line(int fd, char *remaining, char *buffer)
 	return (temp);
 }
 
-char	*printable_line(char *buffer)
+char	*printable_line(char *remaining)
 {
 	int		i;
 	char	*printable;
 
 	i = 0;
-	if (!buffer)
+	if (!remaining)
 		return (NULL);
 	while (buffer[i] != '\n')
 	{
 		i++;
 		if (buffer[i] == '\0')
 		{
-			printable = ft_strdup(buffer);
+			printable = ft_strdup(remaining);
 		}
 	}
-	printable = ft_substr(buffer, 0, i);
+	printable = ft_substr(remaining, 0, i);
 	*printable++ = '\n';
 	if (!printable)
 	{
@@ -94,7 +94,7 @@ char	*printable_line(char *buffer)
 	return (printable);
 }
 
-char	*save_content(char *buffer)
+char	*save_content(char *remaining)
 {
 	int		i;
 	int		j;
@@ -102,22 +102,28 @@ char	*save_content(char *buffer)
 
 	i = 0;
 	j = 0;
-	if (buffer[i] == '\0')
+	if (remaining[i] == '\0')
 		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
+	while (remaining[i] && remaining[i] != '\n')
 		i++;
-	if (!buffer[i])
+	if (!remaining[i])
 	{
-		free(buffer);
+		free(remaining);
 		return (NULL);
 	}
 		i++;
-	save_remaining = malloc((ft_strlen(buffer) - i) + 1 * sizeof(char));
+	save_remaining = malloc((ft_strlen(remaining) - i) + 1 * sizeof(char));
 	if (!save_remaining)
 		return (NULL);
-	while (buffer[i] != '\0')
-		save_remaining[j++] = buffer[i++];
+	while (remaining[i] != '\0')
+		save_remaining[j++] = remaining[i++];
 	save_remaining[j] = '\0';
 	return (save_remaining);
 }
 //fução para dar free?
+char	*ft_free (char *s1, char *s2)
+{
+	free(s1);
+	free(s2);
+	return (NULL)
+}
