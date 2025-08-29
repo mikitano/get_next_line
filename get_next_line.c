@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/29 19:31:17 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/29 19:58:06 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = read_line(fd, buffer, remaining);
-	printf("o que le: %s\n", line);
+	//printf("o que le: %s\n", line);
 
 	if (!line)
 	{
 		free(buffer);
+		free(remaining);
 		return (NULL);
 	}
 	remaining = divide_line_and_save_rest(line);
@@ -86,14 +87,12 @@ char	*divide_line_and_save_rest(char *line)
 	{
 		return (NULL);
 	}
-	save_rest = ft_substr(line, (i + 1), (ft_strlen(line) - i));
+	i++;
+	save_rest = ft_substr(line, i, (ft_strlen(line) - i));
 	if (!save_rest)
-	{
-		free(save_rest);
 		return (NULL);
-	}
-	printf("o que salva: %s\n", save_rest);
-	line[i + 1] = '\0';
+	//printf("o que salva: %s\n", save_rest);
+	line[i] = '\0';
 	return (save_rest);
 }
 
