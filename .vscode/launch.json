@@ -1,26 +1,24 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"name": "Executar programa C",
-			"type": "cppdbg",
-			"request": "launch",
-			"program": "${workspaceFolder}/a.out", // ou substitua pelo nome do seu executável
-			"args": [],
-			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}",
-			"environment": [],
-			"externalConsole": true,
-			"MIMode": "gdb",
-			"setupCommands": [
-				{
-					"description": "Habilita formatação para o GDB",
-					"text": "-enable-pretty-printing",
-					"ignoreFailures": true
-				}
-			],
-			"preLaunchTask": "compilar o programa",
-			"miDebuggerPath": "/usr/bin/gdb" // ou o caminho do gdb no seu sistema
-		}
-	]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug C Program",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/a.out",   // Path to your compiled executable
+      "args": [],                             // Any command line arguments to your program
+      "stopAtEntry": false,                   // Set to true if you want to stop at main
+      "cwd": "${workspaceFolder}",            // Working directory
+      "environment": [],
+      "externalConsole": false,               // Set true if you want a separate console window
+      "MIMode": "gdb",                        // Debugger type (gdb or lldb)
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
 }

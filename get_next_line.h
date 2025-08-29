@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:44:46 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/26 20:16:21 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/29 14:45:56 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stddef.h>
+# include <stdio.h>
 
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);

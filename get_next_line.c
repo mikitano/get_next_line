@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/26 20:17:02 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/29 17:45:07 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,21 @@ char	*get_next_line(int fd)
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-	if ((fd < 0) | (BUFFER_SIZE <= 0))
+	if ((fd < 0) || (BUFFER_SIZE <= 0))
 	{
 		free(buffer);
 		remaining = NULL;
 		return (NULL);
 	}
 	line = read_line(fd, buffer, remaining);
-		if (!line)
+	//printf("full line: %s\n", line);
+	if (!line)
 	{
 		free(buffer);
 		return (NULL);
 	}
 	remaining = divide_line_and_save_rest(line);
+	//printf("resto: %s\n", remaining);
 	return (line);
 }
 
@@ -46,11 +48,12 @@ char	*read_line(int fd, char *buffer, char *remaining)
 	int		bytes_read;
 	char	*temp;
 
-	if (!remaining)
-		remaining = ft_strdup("");
+	//if (!remaining)
+	//	remaining = ft_strdup("");
 	bytes_read = 1;
-	while (bytes_read > 0 && !ft_strchr(remaining, '\n'))
-	// esse é o remaining antigo, então ele só vai verificar se tem o '\n' depois que ele já tiver dado o join pra remaining.
+	while (bytes_read > 0)
+	/*esse é o remaining antigo, então ele só vai verificar se 
+	tem o '\n' depois que ele já tiver dado o join pra remaining.*/
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
@@ -58,11 +61,14 @@ char	*read_line(int fd, char *buffer, char *remaining)
 		else if (bytes_read == 0)
 			return (remaining);
 		buffer[bytes_read] = '\0';
-		// \0 transforma com que o que foi lido em string pra que possamos usar o strjoin!
+		/*\0 transforma com que o que foi lido em string pra
+		que possamos usar o strjoin!*/
 		temp = remaining;
 		remaining = ft_strjoin(temp, buffer);
 		free(temp);
 		temp = NULL;
+		if(ft_strchr(remaining, '\n'))
+			return (remaining);
 	}
 	return (remaining);
 }
@@ -79,18 +85,20 @@ char	*divide_line_and_save_rest(char *line)
 		i++;
 	if (!line[i])
 	{
-		free(line);
+		//return (line);
+		//free(line);
 		return (NULL);
 	}
 	save_rest = ft_substr(line, (i + 1), (ft_strlen(line) - i));
 	if (!save_rest)
 	{
 		free(save_rest);
-		return (NULL)
+		return (NULL);
 	}
 	line[i++] = '\0';
 	return (save_rest);
 }
+
 // //fução para dar free?
 // char	*ft_free (char *s1, char *s2)
 // {
