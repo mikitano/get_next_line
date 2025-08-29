@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/29 17:45:07 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/29 19:31:17 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*read_line(int fd, char *buffer, char *remaining);
 char	*divide_line_and_save_rest(char *line);
-// char	*printable_line(char *remaining);
 
 char	*get_next_line(int fd)
 {
@@ -32,14 +31,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = read_line(fd, buffer, remaining);
-	//printf("full line: %s\n", line);
+	printf("o que le: %s\n", line);
+
 	if (!line)
 	{
 		free(buffer);
 		return (NULL);
 	}
 	remaining = divide_line_and_save_rest(line);
-	//printf("resto: %s\n", remaining);
 	return (line);
 }
 
@@ -48,8 +47,6 @@ char	*read_line(int fd, char *buffer, char *remaining)
 	int		bytes_read;
 	char	*temp;
 
-	//if (!remaining)
-	//	remaining = ft_strdup("");
 	bytes_read = 1;
 	while (bytes_read > 0)
 	/*esse é o remaining antigo, então ele só vai verificar se 
@@ -64,10 +61,12 @@ char	*read_line(int fd, char *buffer, char *remaining)
 		/*\0 transforma com que o que foi lido em string pra
 		que possamos usar o strjoin!*/
 		temp = remaining;
+		//printf("o que lê sem juntar: %s\n", temp);
+
 		remaining = ft_strjoin(temp, buffer);
 		free(temp);
 		temp = NULL;
-		if(ft_strchr(remaining, '\n'))
+		if (ft_strchr(remaining, '\n'))
 			return (remaining);
 	}
 	return (remaining);
@@ -85,8 +84,6 @@ char	*divide_line_and_save_rest(char *line)
 		i++;
 	if (!line[i])
 	{
-		//return (line);
-		//free(line);
 		return (NULL);
 	}
 	save_rest = ft_substr(line, (i + 1), (ft_strlen(line) - i));
@@ -95,7 +92,8 @@ char	*divide_line_and_save_rest(char *line)
 		free(save_rest);
 		return (NULL);
 	}
-	line[i++] = '\0';
+	printf("o que salva: %s\n", save_rest);
+	line[i + 1] = '\0';
 	return (save_rest);
 }
 
@@ -105,28 +103,4 @@ char	*divide_line_and_save_rest(char *line)
 // 	free(s1);
 // 	free(s2);
 // 	return (NULL)
-// }
-
-// char	*printable_line(char *remaining)
-// {
-// 	int		i;
-// 	char	*printable;
-
-// 	i = 0;
-// 	if (!remaining)
-// 		return (NULL);
-// 	while (buffer[i] != '\n')
-// 	{
-// 		i++;
-// 		if (buffer[i] == '\0')
-// 			printable = ft_strdup(remaining);
-// 	}
-// 	printable = ft_substr(remaining, 0, i);
-// 	*printable++ = '\n';
-// 	if (!printable)
-// 	{
-// 		free (printable);
-// 		return (NULL);
-// 	}
-// 	return (printable);
 // }
