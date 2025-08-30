@@ -1,14 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/30 16:18:38 by mkitano          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    gnl comentado.txt                                  :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/08/16 14:43:47 by mkitano           #+#    #+#              #
+#    Updated: 2025/08/30 13:34:16 by mkitano          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 #include "get_next_line.h"
 
@@ -28,15 +28,15 @@ char	*get_next_line(int fd)
 	{
 		free(buffer);
 		remaining = NULL;
-		buffer = NULL;
 		return (NULL);
 	}
 	line = read_line(fd, buffer, remaining);
+	//printf("o que le: %s\n", line);
+
 	if (!line)
 	{
 		free(buffer);
 		free(remaining);
-		remaining = NULL;
 		return (NULL);
 	}
 	remaining = divide_line_and_save_rest(line);
@@ -51,6 +51,8 @@ char	*read_line(int fd, char *buffer, char *remaining)
 
 	bytes_read = 1;
 	while (bytes_read > 0)
+	/*esse é o remaining antigo, então ele só vai verificar se 
+	tem o '\n' depois que ele já tiver dado o join pra remaining.*/
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
@@ -58,6 +60,8 @@ char	*read_line(int fd, char *buffer, char *remaining)
 		else if (bytes_read == 0)
 			return (remaining);
 		buffer[bytes_read] = '\0';
+		/*\0 transforma com que o que foi lido em string pra
+		que possamos usar o strjoin!*/
 		temp = remaining;
 		remaining = ft_strjoin(temp, buffer);
 		free(temp);
@@ -78,13 +82,23 @@ char	*divide_line_and_save_rest(char *line)
 		return (NULL);
 	while (line[i] && line[i] != '\n')
 		i++;
-	if (line[i] == '\n')
-		i++;
 	if (!line[i])
+	{
 		return (NULL);
+	}
+	i++;
 	save_rest = ft_substr(line, i, (ft_strlen(line) - i));
 	if (!save_rest)
 		return (NULL);
+	//printf("o que salva: %s\n", save_rest);
 	line[i] = '\0';
 	return (save_rest);
 }
+
+// //fução para dar free?
+// char	*ft_free (char *s1, char *s2)
+// {
+// 	free(s1);
+// 	free(s2);
+// 	return (NULL)
+// }
