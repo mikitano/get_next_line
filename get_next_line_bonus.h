@@ -6,7 +6,7 @@
 /*   By: mkitano <mkitano@student.42sp.org.br>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 14:44:46 by mkitano           #+#    #+#             */
-/*   Updated: 2025/08/31 14:41:09 by mkitano          ###   ########.fr       */
+/*   Updated: 2025/08/31 17:41:12 by mkitano          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # endif
 
 # ifndef MAX_FD
-#  define MAX_FD 1024
+#  define MAX_FD 4096
 # endif
 
 # include <stdlib.h>
