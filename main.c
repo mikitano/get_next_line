@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 #include <fcntl.h>
-#include <stddef.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
